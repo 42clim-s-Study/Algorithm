@@ -1,0 +1,49 @@
+nclude <stdio.h>
+#include <string.h>
+
+int main()
+{
+  int M, cur, idx;
+  char str[600001] = {0,};
+  char input;
+
+  scanf("%s %d", str, &M);
+  cur = strlen(str);
+  while (M--)
+  {
+    scanf(" %c", &input);
+    if (input == 'L')
+    {
+      if (cur > 0)
+        cur--;
+    }
+    else if (input == 'D')
+    {
+      if (str[cur])
+        cur++;
+    }
+    else if (input == 'B')
+    {
+      if (cur > 0)
+      {
+        idx = --cur;
+        str[idx] = 0;
+        while(str[++idx])
+          str[idx-1] = str[idx];
+        str[idx-1] = 0;
+      }
+    }
+    else if (input == 'P')
+    {
+      idx = strlen(str);
+      while(idx > cur)
+      {
+        str[idx] = str[idx-1];
+        idx--;
+      }
+      scanf(" %c", &str[cur]);
+      cur++;
+    }
+  }
+  printf("%s\n", str);
+}

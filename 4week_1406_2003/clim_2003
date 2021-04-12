@@ -1,0 +1,26 @@
+nclude <stdio.h>
+
+int main(void) {
+  int M , N, i = 0, sum = 0, cnt = 0, ptr1 = 0, ptr2 = 0;
+  
+  scanf("%d %d", &N, &M);
+  int list[N];
+  while(i < N)
+    scanf(" %d", &list[i++]);
+  while(ptr1 < N)
+  {
+    sum = 0;
+    ptr2 = ptr1;
+    while(ptr2 < N)
+    {
+      sum += list[ptr2];
+      if (sum > M)
+        break;
+      else if (sum == M)
+        cnt++;
+      ptr2++;
+    }
+    ptr1++;
+  }
+  printf("%d\n", cnt);
+}
