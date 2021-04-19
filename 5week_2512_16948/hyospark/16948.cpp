@@ -1,13 +1,11 @@
 #include <cstdio>
 #include <queue>
 using namespace std;
-
 int main()
 {
 	int n;
 	scanf("%d", &n);
-	int map[6][6] = {0,};
-	bool vis[6][6] = {false, };
+	int map[200][200] = {0,};
 	int result;
 
 	int r1,c1,r2,c2;
@@ -16,8 +14,6 @@ int main()
 	
 	int mov_r[6] = {-2, -2, 0, 0, 2, 2};
 	int mov_c[6] = {-1, 1, -2, 2, -1, 1};
-
-	
 	queue.push(make_pair(r1,c1));
 	while (!queue.empty())
 	{
@@ -28,11 +24,9 @@ int main()
 			int cc = queue.front().second + mov_c[i];
 			if(rr >= 0 && rr < n && cc >= 0 && cc < n)
 			{
-				if (vis[rr][cc])
+				if (map[rr][cc])
 					continue ;
 				map[rr][cc] = map[queue.front().first][queue.front().second] + 1;
-				printf("rr : %d cc : %d, map[rs][cs] : %d\n", rr, cc , map[rr][cc]);
-				vis[rr][cc] = true;
 				if (rr == r2 && cc == c2)
 				{
 					printf("%d", map[rr][cc]);
