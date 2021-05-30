@@ -1,35 +1,38 @@
-nclude <stdio.h>
+#include <stdio.h>
 #include <stdbool.h>
 
-typedef struct node{
-  int parent;
-} node;
+bool array[100001][100001] = {0,};
+short parent[100001] = {0,};
 
-node nd[100000];
+void mark_parent(int i, int j, int cnt)
+{
+	if (j >= cnt || i >= cnt)
+		return ;
+	while (j <= cnt)
+	{
+		if (array[i][j] == 1 && parent[j] == 0)
+		{
+			parent[j] = i;
+			mark_parent(j, 1, cnt);
+		}
+		++j;
+	}
+	return ;
+}
 
 int main()
 {
-  int n, i = 0;
-  int i1, i2;
-  bool check[100000] = {0,};
-  check[1] = 1;
-  scanf("%d", &n);
-  while(++i < n)
-  {
-    scanf("%d %d", &i1, &i2);
-    if (check[i1] == 1)
-    {
-      nd[i2].parent = i1;
-      check[i2] = 1;
-    }
-    else if(check[i2] == 1)
-    {
-      nd[i1].parent = i2;
-      check[i1] = 1;
-    }
-  }
-  for(i = 2; i <= n; i++)
-  {
-    printf("%d\n",nd[i].parent);
-  }
+	int cnt, i = 1, a, b;
+
+	scanf("%d", &cnt);
+	while (i < cnt)
+	{
+		scanf("%d %d", &a, &b);
+		array[a][b] = 1;
+		array[b][a] = 1;
+		++i;
+	}
+	mark_parent(1, 1, cnt);
+	for (i = 2; i <= cnt; i++)
+		printf("%d\n", parent[i]);
 }
